@@ -1,1 +1,1 @@
-echo "Deployment version 1.0 (Production)"
+echo "Deployment version 2.0 (Testing Beta)"
