@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DevOps Day 3 Notes - Docker & Containerization</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.6; color: #24292e; max-width: 850px; margin: 40px auto; padding: 0 20px; }
+  h1 { border-bottom: 2px solid #eaecef; padding-bottom: 8px; color: #0366d6; }
+  h2 { border-bottom: 1px solid #eaecef; padding-bottom: 6px; margin-top: 24px; color: #24292e; }
+  code { background-color: #f6f8fa; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 90%; }
+  pre { background-color: #f6f8fa; padding: 12px; border-radius: 6px; overflow: auto; border: 1px solid #e1e4e8; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+  th, td { border: 1px solid #dfe2e5; padding: 10px 14px; text-align: left; }
+  th { background-color: #f6f8fa; font-weight: 600; }
+  ul { padding-left: 20px; }
+  li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+  <h1>DevOps Engineering Handbook — Day 3 Notes (Part 1)</h1>
+  
+  <h2>1. Docker Architecture & Core Concepts</h2>
+  <ul>
+    <li><strong>Image vs Container:</strong> <code>Image</code> read-only blueprint hoti hai jisme application code, OS runtime, aur dependencies packed hoti hain. <code>Container</code> usi image ka ek isolated running instance (process) hota hai.</li>
+    <li><strong>Docker Daemon:</strong> Background service (<code>dockerd</code>) jo images, containers, networks, aur storage volumes manage karti hai.</li>
+  </ul>
+
+  <h2>2. Essential Container Lifecycle Commands</h2>
+  <table>
+    <tr><th>Command</th><th>Flags / Args</th><th>Description</th></tr>
+    <tr><td><code>docker run</code></td><td><code>-d -p 8080:80 --name &lt;name&gt;</code></td><td>Image pull karke container ko detached mode (<code>-d</code>) me background me start karta hai aur host port 8080 ko container port 80 se map karta hai.</td></tr>
+    <tr><td><code>docker ps</code></td><td>No flag</td><td>Sirf running containers ki list display karta hai.</td></tr>
+    <tr><td><code>docker ps -a</code></td><td><code>-a</code> (All)</td><td>Running aur stopped (Exited) sabhi containers show karta hai.</td></tr>
+    <tr><td><code>docker logs</code></td><td><code>&lt;name&gt;</code></td><td>Container ke live logs (stdout/stderr) display karta hai.</td></tr>
+    <tr><td><code>docker exec -it</code></td><td><code>-i</code> (Interactive), <code>-t</code> (TTY)</td><td>Running container ke andar shell (<code>bash</code>/<code>sh</code>) session open karta hai debugging ke liye.</td></tr>
+    <tr><td><code>docker stop</code></td><td><code>&lt;name&gt;</code></td><td>Container process ko graceful shutdown signal (<code>SIGTERM</code>) bhejta hai.</td></tr>
+    <tr><td><code>docker rm</code></td><td><code>&lt;name&gt;</code></td><td>Stopped container instance ko delete karke storage aur name release karta hai.</td></tr>
+  </table>
+
+  <h2>3. WSL Socket & Permissions Fix</h2>
+  <ul>
+    <li>Non-root permission fix: <code>sudo chmod 666 /var/run/docker.sock</code></li>
+    <li>Docker service management in WSL: <code>sudo service docker start</code></li>
+  </ul>
+</body>
+</html>

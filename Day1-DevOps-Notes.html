@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DevOps Day 1 Notes</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.6; color: #24292e; max-width: 850px; margin: 40px auto; padding: 0 20px; }
+  h1 { border-bottom: 2px solid #eaecef; padding-bottom: 8px; color: #0366d6; }
+  h2 { border-bottom: 1px solid #eaecef; padding-bottom: 6px; margin-top: 24px; color: #24292e; }
+  code { background-color: #f6f8fa; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 90%; }
+  pre { background-color: #f6f8fa; padding: 12px; border-radius: 6px; overflow: auto; border: 1px solid #e1e4e8; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+  th, td { border: 1px solid #dfe2e5; padding: 10px 14px; text-align: left; }
+  th { background-color: #f6f8fa; font-weight: 600; }
+  ul { padding-left: 20px; }
+  li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+  <h1>DevOps Engineering Handbook — Day 1 Notes</h1>
+  
+  <h2>1. Core Architecture & Safety</h2>
+  <ul>
+    <li><strong>Environment Isolation:</strong> WSL 2 (Ubuntu) Windows host ke Angular 7 / legacy Node.js environment ko touch kiye bina completely isolated Linux environment provide karta hai.</li>
+    <li><strong>Windows Filesystem Mount:</strong> <code>/mnt/c/</code>, <code>/mnt/d/</code></li>
+    <li><strong>Linux UNC Network Path:</strong> <code>\\wsl$\Ubuntu\home\vijay13798\</code></li>
+  </ul>
+
+  <h2>2. Essential Linux Commands</h2>
+  <table>
+    <tr><th>Command</th><th>Syntax / Example</th><th>Description</th></tr>
+    <tr><td><code>pwd</code></td><td><code>pwd</code></td><td>Current working directory ka absolute path print karta hai.</td></tr>
+    <tr><td><code>cd</code></td><td><code>cd devops-journey</code></td><td>Directory switch karta hai (<code>cd ..</code> to go back).</td></tr>
+    <tr><td><code>ls</code></td><td><code>ls -la</code></td><td>Hidden files aur permissions ke sath file list karta hai.</td></tr>
+    <tr><td><code>mkdir</code></td><td><code>mkdir logs backup</code></td><td>New directories create karta hai.</td></tr>
+    <tr><td><code>touch</code></td><td><code>touch app.log</code></td><td>Blank file create karta hai.</td></tr>
+    <tr><td><code>cp</code></td><td><code>cp file.txt backup/</code></td><td>Files duplicate / copy karta hai.</td></tr>
+    <tr><td><code>mv</code></td><td><code>mv old.txt new.txt</code></td><td>File rename ya move karta hai.</td></tr>
+    <tr><td><code>rm</code></td><td><code>rm file.txt</code></td><td>File permanently delete karta hai.</td></tr>
+  </table>
+
+  <h2>3. Log Inspection & Debugging (Production Standard)</h2>
+  <ul>
+    <li><code>head -n 10 file.txt</code>: Top 10 lines view karta hai.</li>
+    <li><code>tail -n 10 file.txt</code>: Bottom 10 lines view karta hai.</li>
+    <li><code>tail -f file.log</code>: Real-time live log stream monitor karta hai (<code>Ctrl + C</code> to exit).</li>
+    <li><code>less file.log</code>: Memory-safe page-by-page reader for heavy files (<code>q</code> to exit).</li>
+    <li><code>grep -n "keyword" file.log</code>: Pattern match karke line numbers display karta hai.</li>
+  </ul>
+
+  <h2>4. Permissions & Shell Scripting</h2>
+  <ul>
+    <li><strong>Permission Format:</strong> <code>[type][user][group][others]</code> (e.g. <code>-rwxr-xr-x</code>)</li>
+    <li><strong>Octal Calculation:</strong> Read (4) + Write (2) + Execute (1) = 7 (Full Access)</li>
+    <li><strong>Executable Script:</strong> <code>chmod +x deploy.sh</code> (ya <code>chmod 755 deploy.sh</code>)</li>
+    <li><strong>Execution:</strong> <code>./deploy.sh</code></li>
+  </ul>
+
+  <h2>5. Process Management & Networking</h2>
+  <ul>
+    <li><code>sleep 1000 &</code>: Background me process run karta hai.</li>
+    <li><code>ps aux | grep sleep</code>: Running processes list karke <strong>PID</strong> nikalta hai.</li>
+    <li><code>kill -9 &lt;PID&gt;</code>: Forcefully process terminate karta hai.</li>
+    <li><code>top</code>: Real-time CPU, RAM aur task utilization monitor karta hai.</li>
+    <li><code>curl -I https://www.google.com</code>: HTTP response status aur headers check karta hai.</li>
+    <li><code>ss -tuln</code>: System par listening TCP/UDP sockets aur ports check karta hai.</li>
+    <li><code>ip addr show</code>: where is ip a (private IP check karna)</li>
+  </ul>
+</body>
+</html>
