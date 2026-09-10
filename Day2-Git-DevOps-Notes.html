@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DevOps Day 2 Notes - Git & GitHub</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.6; color: #24292e; max-width: 850px; margin: 40px auto; padding: 0 20px; }
+  h1 { border-bottom: 2px solid #eaecef; padding-bottom: 8px; color: #0366d6; }
+  h2 { border-bottom: 1px solid #eaecef; padding-bottom: 6px; margin-top: 24px; color: #24292e; }
+  code { background-color: #f6f8fa; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 90%; }
+  pre { background-color: #f6f8fa; padding: 12px; border-radius: 6px; overflow: auto; border: 1px solid #e1e4e8; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+  th, td { border: 1px solid #dfe2e5; padding: 10px 14px; text-align: left; }
+  th { background-color: #f6f8fa; font-weight: 600; }
+  ul { padding-left: 20px; }
+  li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+  <h1>DevOps Engineering Handbook — Day 2 Notes</h1>
+  
+  <h2>1. Isolated & Safe Git Configuration</h2>
+  <ul>
+    <li><strong>Scope Isolation:</strong> Humne <code>--global</code> ke bajaye <code>git config</code> (local) use kiya taaki Windows host ya office ke Git credentials disturb na hon.</li>
+    <li><strong>Commands:</strong>
+      <pre><code>git init
+git config user.name "Vijay"
+git config user.email "vijaypande1307@gmail.com"
+git config --local -l   # Verify local settings</code></pre>
+    </li>
+  </ul>
+
+  <h2>2. Branching & Modern Standards</h2>
+  <table>
+    <tr><th>Command</th><th>Flag Breakdown</th><th>Description</th></tr>
+    <tr><td><code>git branch -M main</code></td><td><code>-M</code> (Move / Force rename)</td><td>Default <code>master</code> branch ko modern standard <code>main</code> me rename karta hai.</td></tr>
+    <tr><td><code>git checkout -b &lt;branch&gt;</code></td><td><code>-b</code> (Create + Switch)</td><td>Nayi branch create karta hai aur usi waqt uspar checkout kar deta hai.</td></tr>
+    <tr><td><code>git checkout main</code></td><td>No flag</td><td>Pehle se bani hui existing branch par switch karta hai.</td></tr>
+    <tr><td><code>git branch -d &lt;branch&gt;</code></td><td><code>-d</code> (Safe Delete)</td><td>Merged branch ko delete karta hai (Unmerged ke liye <code>-D</code> lagta hai).</td></tr>
+  </table>
+
+  <h2>3. Merge Conflicts: Anatomy & Resolution</h2>
+  <ul>
+    <li><strong>Conflict Trigger:</strong> Jab do divergent branches par ek hi file ki same line ko modify karke merge kiya jata hai.</li>
+    <li><strong>Conflict Markers:</strong>
+      <ul>
+        <li><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>: Current checked-out branch ka version.</li>
+        <li><code>=======</code>: Separator divider.</li>
+        <li><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; &lt;branch&gt;</code>: Incoming branch ka version.</li>
+      </ul>
+    </li>
+    <li><strong>Resolution Flow:</strong>
+      <ol>
+        <li>VS Code me required changes select karo (<em>Accept Incoming / Current / Both</em>).</li>
+        <li>File save karo (<code>Ctrl + S</code>).</li>
+        <li>Resolved file ko stage karo: <code>git add &lt;file&gt;</code>.</li>
+        <li>Merge commit record karo: <code>git commit -m "fix: resolve merge conflict..."</code>.</li>
+      </ol>
+    </li>
+    <li><strong>Visual Inspection:</strong> <code>git log --oneline --graph -n 5</code> branch divergence aur convergence ka ASCII graph show karta hai.</li>
+  </ul>
+
+  <h2>4. Remote GitHub Integration via SSH (Enterprise Standard)</h2>
+  <ul>
+    <li><strong>SSH Keygen:</strong> <code>ssh-keygen -t ed25519 -C "email"</code> (Modern lightweight cryptographic key pair).</li>
+    <li><strong>Key Separation:</strong>
+      <ul>
+        <li>Private Key: <code>~/.ssh/id_ed25519</code> (Confidential, machine ke andar safe rehti hai).</li>
+        <li>Public Key: <code>~/.ssh/id_ed25519.pub</code> (GitHub profile settings me map hoti hai).</li>
+      </ul>
+    </li>
+    <li><strong>Test Auth:</strong> <code>ssh -T git@github.com</code> (Connection verification).</li>
+    <li><strong>Link Remote:</strong> <code>git remote add origin &lt;SSH_URL&gt;</code>.</li>
+    <li><strong>Track & Push:</strong> <code>git push -u origin main</code> (<code>-u</code> upstream tracking set karta hai).</li>
+  </ul>
+</body>
+</html>
